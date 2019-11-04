@@ -18,7 +18,7 @@ class App extends React.Component {
     this.setState({ username: res.data })
   }
   logout = () => {
-    axios.get('/auth/logout')
+    axios.delete('/auth/logout')
     this.setState({username: '', input: ''})
   }
   getPoints = async () => {
@@ -41,6 +41,7 @@ class App extends React.Component {
           type="text"
           placeholder="Username"
           onChange={e => this.handleChange(e)}
+          value={this.state.input}
         />
         <button onClick={this.login}>Login</button>
 

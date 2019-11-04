@@ -14,5 +14,9 @@ module.exports = {
             profilePic: 'url'
         }
         res.status(200).send(req.session.username)
+    },
+    logout: (req, res) => {
+        req.session.destroy()
+        res.status(200).send('logged out successfully')
     }
 }

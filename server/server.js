@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const ctrl = require('./controller')
 const {SERVER_PORT, SESSION_SECRET} = process.env
+const middleware = require('./middleware')
 
 const app = express()
 
@@ -16,9 +17,11 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 10
     }
 }))
+// app.use(middleware.customMiddleware)
 
 //endpoints
-app.get('/api/points', ctrl.getPoints)
+app.get('/api/points', middleware.authenticate, ctrl.getPoints)
+app.post('/auth/login', ctrl.login)
 
 
 //listen
